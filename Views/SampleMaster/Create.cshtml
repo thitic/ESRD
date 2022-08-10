@@ -1,0 +1,110 @@
+﻿@model ESRD_Sample01.SampleMaster
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>เพิ่มตัวอย่าง</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        <div class="col-sm-5">
+            <div class="row">
+                <div class="col-sm">
+                    @Html.LabelFor(model => model.ContactPersonId, "ชื่อผู้ส่งตัวอย่าง", htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.DropDownList("ContactPersonId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ContactPersonId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="col-sm-3">
+            <div class="container-fluid">โปรดระบุวิธี</div>
+            <div class="container-fluid">
+                @Html.RadioButtonFor(model => model.Used, "วิธีการของห้องปฏิบัติการ")
+                วิธีการของห้องปฏิบัติการ
+            </div>
+            <div class="container-fluid">
+                ระบุวิธี
+                @Html.TextBoxFor(model => model.Used)
+            </div>
+        </div>
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    อุณหภูมิขณะรับตัวอย่าง
+                    <div class="col-sm">
+                        @Html.RadioButtonFor(model => model.Temp, "อุณหภูมิห้อง")
+                        อุณหภูมิห้อง
+                        @Html.RadioButtonFor(model => model.Temp, "แช่เย็น")
+                        แช่เย็น
+                        @Html.RadioButtonFor(model => model.Temp, "ร้อน")
+                        ร้อน
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="col-sm-4">
+            <div class="container-fluid">ค่าความไม่แน่นอน</div>
+            <div class="container-fluid">
+                @Html.RadioButtonFor(model => model.Uncertainty, "ต้องการ")
+                ต้องการ
+                @Html.RadioButtonFor(m => m.Uncertainty, "ไม่ต้องการ")
+                ไม่ต้องการ
+            </div>
+        </div>
+    </div>
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="container">
+        <div class="mx-auto">
+            <div class="container-fluid">
+                ภาชนะบรรจุ
+                <div class="col-sm">
+                    @Html.RadioButtonFor(model => model.Container, "ถุงพลาสติก")
+                    ถุงพลาสติก
+                    @Html.RadioButtonFor(model => model.Container, "ถุงซิป")
+                    ถุงซิป
+                    @Html.RadioButtonFor(model => model.Container, "ขวด PP")
+                    ขวด PP
+                    @Html.RadioButtonFor(model => model.Container, "ขวด PET")
+                    ขวด PET
+                    @Html.RadioButtonFor(model => model.Container, "ขวด HDPE")
+                    ขวด HDPE
+                    @Html.RadioButtonFor(model => model.Container, "ขวด PE")
+                    ขวด PE
+                    อื่นๆ(ระบุ)
+                    @Html.TextBoxFor(model => model.Container)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-5 col-md-10">
+            <input type="submit" value="ส่งตัวอย่าง" class="btn btn-success" />
+        </div>
+    </div>
+
+}
+
+<div class="col-sm-8">
+    <div class="row">
+        <div class="center">
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

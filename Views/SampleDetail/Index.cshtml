@@ -1,0 +1,93 @@
+﻿@model IEnumerable<ESRD_Sample01.SampleDetail>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.No)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SampleCodeNames)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuantityPerContainer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalContainer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ParameterTested)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnitOfTesting)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LabNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SampleCondition)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SampleMaster.Used)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TypeOfSampleDetail.TypeOfSampleDetailName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.No)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SampleCodeNames)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuantityPerContainer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalContainer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ParameterTested)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnitOfTesting)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LabNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SampleCondition)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SampleMaster.Used)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TypeOfSampleDetail.TypeOfSampleDetailName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

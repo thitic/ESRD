@@ -1,0 +1,152 @@
+﻿@model ESRD_Sample01.SampleDetail
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>รายละเอียดตัวอย่างและรายการวิเคราะห์</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>SampleDetail</h4>
+    <hr />
+    <div class="col-sm-5">
+        <div class="row">
+            <div class="col-sm">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-4">
+        <div class="row">
+            <div class="col-sm">
+                @Html.LabelFor(model => model.No, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.No, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.No, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-7">
+        <div class="row">
+            <div class="col-sm">
+                @Html.LabelFor(model => model.SampleCodeNames, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.SampleCodeNames, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SampleCodeNames, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-4">
+        <div class="row">
+            <div class="col-sm">
+                @Html.LabelFor(model => model.QuantityPerContainer, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.QuantityPerContainer, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.QuantityPerContainer, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-7">
+        <div class="row">
+            <div class="col-sm">
+                @Html.LabelFor(model => model.TotalContainer, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.TotalContainer, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TotalContainer, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-4">
+        <div class="row">
+            <div class="col-sm">
+                @Html.LabelFor(model => model.ParameterTested, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.ParameterTested, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ParameterTested, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-7">
+        <div class="row">
+            <div class="col-sm">
+                @Html.LabelFor(model => model.UnitOfTesting, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.UnitOfTesting, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UnitOfTesting, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-4">
+        <div class="row">
+            <div class="col-sm">
+                @Html.LabelFor(model => model.LabNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.LabNo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LabNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-7">
+        <div class="row">
+            <div class="col-sm">
+                @Html.LabelFor(model => model.SampleCondition, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.SampleCondition, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SampleCondition, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-4">
+        <div class="row">
+            <div class="col-sm">
+                @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-11">
+        <div class="row">
+            <div class="col-sm">
+                @Html.LabelFor(model => model.TypeOfSampleDetailId, "TypeOfSampleDetailId", htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.DropDownList("TypeOfSampleDetailId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.TypeOfSampleDetailId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+    <div class="col-sm-8">
+        <div class="row">
+            <div class="col-sm">
+                @Html.LabelFor(model => model.SampleMasterId, "SampleMasterId", htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.DropDownList("SampleMasterId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SampleMasterId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-5 col-md-10">
+            <input type="submit" value="ส่งตัวอย่าง" class="btn btn-success" />
+        </div>
+    </div>
+</div>
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }

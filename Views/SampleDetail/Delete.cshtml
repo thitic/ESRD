@@ -1,0 +1,112 @@
+﻿@model ESRD_Sample01.SampleDetail
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>SampleDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.No)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.No)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SampleCodeNames)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SampleCodeNames)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuantityPerContainer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuantityPerContainer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalContainer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalContainer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ParameterTested)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ParameterTested)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UnitOfTesting)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnitOfTesting)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LabNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LabNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SampleCondition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SampleCondition)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SampleMaster.Used)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SampleMaster.Used)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TypeOfSampleDetail.TypeOfSampleDetailName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TypeOfSampleDetail.TypeOfSampleDetailName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,58 @@
+﻿@model ESRD_Sample01.SampleMaster
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SampleMaster</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Used)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Used)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Temp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Temp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Uncertainty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Uncertainty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Container)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Container)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactPerson.PersonName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactPerson.PersonName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ESRDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ContactPerson">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PersonName" Type="nvarchar" MaxLength="200" />
+    <Property Name="Moblie" Type="int" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Position" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="SampleDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="No" Type="int" />
+    <Property Name="SampleCodeNames" Type="nvarchar" MaxLength="50" />
+    <Property Name="QuantityPerContainer" Type="nvarchar" MaxLength="10" />
+    <Property Name="TotalContainer" Type="nvarchar" MaxLength="10" />
+    <Property Name="ParameterTested" Type="nvarchar" MaxLength="50" />
+    <Property Name="UnitOfTesting" Type="nvarchar" MaxLength="20" />
+    <Property Name="LabNo" Type="nvarchar" MaxLength="30" />
+    <Property Name="SampleCondition" Type="nchar" MaxLength="1" />
+    <Property Name="Price" Type="int" />
+    <Property Name="TypeOfSampleDetailId" Type="int" />
+    <Property Name="SampleMasterId" Type="int" />
+  </EntityType>
+  <EntityType Name="SampleMaster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Used" Type="nchar" MaxLength="30" />
+    <Property Name="Temp" Type="nchar" MaxLength="15" />
+    <Property Name="Uncertainty" Type="nchar" MaxLength="15" />
+    <Property Name="Container" Type="nchar" MaxLength="30" />
+    <Property Name="ContactPersonId" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TypeOfSample">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ChemicalFertilizer" Type="nvarchar" MaxLength="30" />
+    <Property Name="OrganicFertilizer" Type="nvarchar" MaxLength="30" />
+    <Property Name="ChemicalOrganicFertilizer" Type="nvarchar" MaxLength="30" />
+    <Property Name="Water" Type="nvarchar" MaxLength="30" />
+    <Property Name="Soil" Type="nvarchar" MaxLength="30" />
+    <Property Name="Ethanol" Type="nvarchar" MaxLength="30" />
+    <Property Name="Other" Type="nvarchar" MaxLength="50" />
+    <Property Name="SampleMasterId" Type="int" />
+  </EntityType>
+  <EntityType Name="TypeOfSampleDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeOfSampleDetailName" Type="nvarchar" MaxLength="30" />
+    <Property Name="TypeOfSampleId" Type="int" />
+  </EntityType>
+  <Association Name="FK_SampleDetail_SampleMaster">
+    <End Role="SampleMaster" Type="Self.SampleMaster" Multiplicity="0..1" />
+    <End Role="SampleDetail" Type="Self.SampleDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SampleMaster">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SampleDetail">
+        <PropertyRef Name="SampleMasterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SampleDetail_TypeOfSampleDetail">
+    <End Role="TypeOfSampleDetail" Type="Self.TypeOfSampleDetail" Multiplicity="0..1" />
+    <End Role="SampleDetail" Type="Self.SampleDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeOfSampleDetail">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SampleDetail">
+        <PropertyRef Name="TypeOfSampleDetailId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SampleMaster_ContactPerson">
+    <End Role="ContactPerson" Type="Self.ContactPerson" Multiplicity="0..1" />
+    <End Role="SampleMaster" Type="Self.SampleMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContactPerson">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SampleMaster">
+        <PropertyRef Name="ContactPersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TypeOfSample_SampleMaster">
+    <End Role="SampleMaster" Type="Self.SampleMaster" Multiplicity="0..1" />
+    <End Role="TypeOfSample" Type="Self.TypeOfSample" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SampleMaster">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TypeOfSample">
+        <PropertyRef Name="SampleMasterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ESRDModelStoreContainer">
+    <EntitySet Name="ContactPerson" EntityType="Self.ContactPerson" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SampleDetail" EntityType="Self.SampleDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SampleMaster" EntityType="Self.SampleMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TypeOfSample" EntityType="Self.TypeOfSample" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TypeOfSampleDetail" EntityType="Self.TypeOfSampleDetail" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_SampleDetail_SampleMaster" Association="Self.FK_SampleDetail_SampleMaster">
+      <End Role="SampleMaster" EntitySet="SampleMaster" />
+      <End Role="SampleDetail" EntitySet="SampleDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SampleDetail_TypeOfSampleDetail" Association="Self.FK_SampleDetail_TypeOfSampleDetail">
+      <End Role="TypeOfSampleDetail" EntitySet="TypeOfSampleDetail" />
+      <End Role="SampleDetail" EntitySet="SampleDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SampleMaster_ContactPerson" Association="Self.FK_SampleMaster_ContactPerson">
+      <End Role="ContactPerson" EntitySet="ContactPerson" />
+      <End Role="SampleMaster" EntitySet="SampleMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TypeOfSample_SampleMaster" Association="Self.FK_TypeOfSample_SampleMaster">
+      <End Role="SampleMaster" EntitySet="SampleMaster" />
+      <End Role="TypeOfSample" EntitySet="TypeOfSample" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

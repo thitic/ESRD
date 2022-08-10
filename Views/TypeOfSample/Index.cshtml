@@ -1,0 +1,75 @@
+﻿@model IEnumerable<ESRD_Sample01.TypeOfSample>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ChemicalFertilizer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrganicFertilizer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChemicalOrganicFertilizer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Water)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Soil)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ethanol)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Other)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SampleMaster.Used)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChemicalFertilizer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrganicFertilizer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChemicalOrganicFertilizer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Water)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Soil)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ethanol)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Other)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SampleMaster.Used)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

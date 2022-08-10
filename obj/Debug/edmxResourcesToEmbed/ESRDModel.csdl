@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ESRDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ContactPerson">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PersonName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Moblie" Type="Int32" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="SampleMaster" Relationship="Self.FK_SampleMaster_ContactPerson" FromRole="ContactPerson" ToRole="SampleMaster" />
+    <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="SampleDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="No" Type="Int32" />
+    <Property Name="SampleCodeNames" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="QuantityPerContainer" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="TotalContainer" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="ParameterTested" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UnitOfTesting" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="LabNo" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="SampleCondition" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="Price" Type="Int32" />
+    <Property Name="TypeOfSampleDetailId" Type="Int32" />
+    <Property Name="SampleMasterId" Type="Int32" />
+    <NavigationProperty Name="SampleMaster" Relationship="Self.FK_SampleDetail_SampleMaster" FromRole="SampleDetail" ToRole="SampleMaster" />
+    <NavigationProperty Name="TypeOfSampleDetail" Relationship="Self.FK_SampleDetail_TypeOfSampleDetail" FromRole="SampleDetail" ToRole="TypeOfSampleDetail" />
+  </EntityType>
+  <EntityType Name="SampleMaster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Used" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+    <Property Name="Temp" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="Uncertainty" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="Container" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+    <Property Name="ContactPersonId" Type="Int32" />
+    <NavigationProperty Name="ContactPerson" Relationship="Self.FK_SampleMaster_ContactPerson" FromRole="SampleMaster" ToRole="ContactPerson" />
+    <NavigationProperty Name="SampleDetail" Relationship="Self.FK_SampleDetail_SampleMaster" FromRole="SampleMaster" ToRole="SampleDetail" />
+    <NavigationProperty Name="TypeOfSample" Relationship="Self.FK_TypeOfSample_SampleMaster" FromRole="SampleMaster" ToRole="TypeOfSample" />
+  </EntityType>
+  <EntityType Name="TypeOfSample">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ChemicalFertilizer" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="OrganicFertilizer" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="ChemicalOrganicFertilizer" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Water" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Soil" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Ethanol" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Other" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SampleMasterId" Type="Int32" />
+    <NavigationProperty Name="SampleMaster" Relationship="Self.FK_TypeOfSample_SampleMaster" FromRole="TypeOfSample" ToRole="SampleMaster" />
+  </EntityType>
+  <EntityType Name="TypeOfSampleDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TypeOfSampleDetailName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="TypeOfSampleId" Type="Int32" />
+    <NavigationProperty Name="SampleDetail" Relationship="Self.FK_SampleDetail_TypeOfSampleDetail" FromRole="TypeOfSampleDetail" ToRole="SampleDetail" />
+  </EntityType>
+  <Association Name="FK_SampleMaster_ContactPerson">
+    <End Role="ContactPerson" Type="Self.ContactPerson" Multiplicity="0..1" />
+    <End Role="SampleMaster" Type="Self.SampleMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContactPerson">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SampleMaster">
+        <PropertyRef Name="ContactPersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SampleDetail_SampleMaster">
+    <End Role="SampleMaster" Type="Self.SampleMaster" Multiplicity="0..1" />
+    <End Role="SampleDetail" Type="Self.SampleDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SampleMaster">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SampleDetail">
+        <PropertyRef Name="SampleMasterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SampleDetail_TypeOfSampleDetail">
+    <End Role="TypeOfSampleDetail" Type="Self.TypeOfSampleDetail" Multiplicity="0..1" />
+    <End Role="SampleDetail" Type="Self.SampleDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeOfSampleDetail">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SampleDetail">
+        <PropertyRef Name="TypeOfSampleDetailId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TypeOfSample_SampleMaster">
+    <End Role="SampleMaster" Type="Self.SampleMaster" Multiplicity="0..1" />
+    <End Role="TypeOfSample" Type="Self.TypeOfSample" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SampleMaster">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TypeOfSample">
+        <PropertyRef Name="SampleMasterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ESRDEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ContactPerson" EntityType="Self.ContactPerson" />
+    <EntitySet Name="SampleDetail" EntityType="Self.SampleDetail" />
+    <EntitySet Name="SampleMaster" EntityType="Self.SampleMaster" />
+    <EntitySet Name="TypeOfSample" EntityType="Self.TypeOfSample" />
+    <EntitySet Name="TypeOfSampleDetail" EntityType="Self.TypeOfSampleDetail" />
+    <AssociationSet Name="FK_SampleMaster_ContactPerson" Association="Self.FK_SampleMaster_ContactPerson">
+      <End Role="ContactPerson" EntitySet="ContactPerson" />
+      <End Role="SampleMaster" EntitySet="SampleMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SampleDetail_SampleMaster" Association="Self.FK_SampleDetail_SampleMaster">
+      <End Role="SampleMaster" EntitySet="SampleMaster" />
+      <End Role="SampleDetail" EntitySet="SampleDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SampleDetail_TypeOfSampleDetail" Association="Self.FK_SampleDetail_TypeOfSampleDetail">
+      <End Role="TypeOfSampleDetail" EntitySet="TypeOfSampleDetail" />
+      <End Role="SampleDetail" EntitySet="SampleDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TypeOfSample_SampleMaster" Association="Self.FK_TypeOfSample_SampleMaster">
+      <End Role="SampleMaster" EntitySet="SampleMaster" />
+      <End Role="TypeOfSample" EntitySet="TypeOfSample" />
+    </AssociationSet>
+    <EntitySet Name="sysdiagrams" EntityType="ESRDModel.sysdiagrams" />
+  </EntityContainer>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+</Schema>
